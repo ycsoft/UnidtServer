@@ -15,13 +15,21 @@
 #ifndef GLOBAL_H_
 #define GLOBAL_H_
 
+#include <vector>
+#include <uv.h>
+#include <http_parser.h>
+
 #include "dttypes.h"
 
-#include <uv.h>
-#include <vector>
+
 
 uv_loop_t   *loop;
 
+http_parser_settings settings;
+
+http_parser *parser;
+
+mem_pool_t  *mem_pool;
 
 std::vector<request_handler>  rq_handler_chain;
 

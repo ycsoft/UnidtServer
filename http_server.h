@@ -16,4 +16,6 @@
 
 void init(int port, int backlog);
 
+void http_init();
+
 #endif
