@@ -20,13 +20,15 @@
 
 #include <uv.h>
 
+#include "log.h"
+
 #define MAX_URL_LENGTH      1024
 #define MAX_INDEX_COUNT     102400 
 #define BLOCK_SIZE          1024
 
+#define LARGE_MEM_COUNT     100
 #define  Malloc(X)   (X*)malloc(sizeof(X))
 #define  Malloc_n(TP,Num) (TP*)malloc(sizeof(TP) * Num)
-
 
 
 //
@@ -84,7 +86,7 @@ void             ud_free(mem_pool_t *pool, void *mem);
  *  For libuv
  * 
  */
-void*   ud_malloc_large(mem_pool_t* pool);
-void   ud_free_large(mem_pool_t*pool, void *mem);
+extern void*   ud_malloc_large(mem_pool_t* pool);
+extern void   ud_free_large(mem_pool_t*pool, void *mem);
 
 #endif //

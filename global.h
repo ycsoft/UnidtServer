@@ -23,15 +23,15 @@
 
 
 
-uv_loop_t   *loop;
+extern uv_loop_t   *loop;
 
-http_parser_settings settings;
+extern http_parser_settings settings;
 
-http_parser *parser;
+extern http_parser *parser;
 
-mem_pool_t  *mem_pool;
+extern mem_pool_t  *mem_pool;
 
-std::vector<request_handler>  rq_handler_chain;
+extern std::vector<request_handler>  rq_handler_chain;
 
 
 #endif // end GLOBAL_H_

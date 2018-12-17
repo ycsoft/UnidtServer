@@ -21,17 +21,22 @@
 #include "callback.h"
 #include "dttypes.h"
 
-extern uv_loop_t *loop;
+#include "global.h"
 
-extern http_parser  *parser;
-extern http_parser_settings settings;
-extern mem_pool_t  *mem_pool;
+// extern uv_loop_t *loop;
+
+// extern http_parser  *parser;
+// extern http_parser_settings settings;
+// extern mem_pool_t  *mem_pool;
+
+http_parser_settings settings;
+http_parser *parser;
 
 void init(int port, int backlog) {
     struct sockaddr_in addr;
 
-    // mem_pool = ud_mem_pool_init(1024*1024*10);
-    // printf("memory pool init ok!\n");
+    mem_pool = ud_mem_pool_init(10<<20);
+    logger->info("memory pool init ok!\n");
 
     uv_ip4_addr("0.0.0.0", port, &addr);
     
@@ -42,10 +47,10 @@ void init(int port, int backlog) {
     int r = uv_listen((uv_stream_t*)&server, backlog, handle_new_connection);
 
     if (r) {
-        printf("Listen Error\n");
+        logger->error("Listen Error\n");
         exit(-1);
     }
-    printf("server started!\n");
+    logger->info("server started!\n");
     uv_run(loop, UV_RUN_DEFAULT);
 }
 
@@ -62,5 +67,5 @@ void http_init() {
     settings.on_header_value = on_header_value;
     settings.on_body = on_body;
 
-    printf("http parser init ok!\n");
+    logger->info("http parser init ok!\n");
 }
